@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RootToGo · Trade cuttings, not cash</title>
+<meta name="description" content="RootToGo is a plant-swapping app for your neighborhood. Coming soon to iPhone.">
+<meta property="og:title" content="RootToGo: trade cuttings, not cash">
+<meta property="og:description" content="A plant-swapping app for your neighborhood. Coming soon to iPhone.">
+<meta property="og:image" content="https://shimi.life/roottogo-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Colors from the RootToGo app icon */
+    --sky: #dce3fe;
+    --sky-deep: #c3cffc;
+    --leaf: #3a9656;
+    --sprout: #5cc47a;
+    --soil: #6f4a33;
+    --soil-light: #9b6a4a;
+    --clay: #e9c9a8;
+    --ink: #2e2a3a;
+    --blush: #ff8fa3;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: "Baloo 2", ui-rounded, system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--soil);
+    font-size: 1.125rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  a:focus-visible, .cta:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 999px; }
+
+  /* ---------- Above ground ---------- */
+  .sky {
+    background: linear-gradient(180deg, #eef1ff 0%, var(--sky) 55%, var(--sky-deep) 100%);
+    padding: 20px 20px 0;
+    text-align: center;
+    position: relative;
+  }
+  .top {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .wordmark { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.01em; color: var(--leaf); }
+  .soon {
+    font-weight: 600; font-size: 0.95rem;
+    background: #fff; border-radius: 999px; padding: 4px 14px;
+    box-shadow: 0 2px 0 var(--sky-deep);
+    white-space: nowrap;
+  }
+
+  .mascot { width: min(300px, 68vw); height: auto; display: block; margin: 4px auto 18px; overflow: visible; }
+  h1 {
+    font-weight: 800;
+    font-size: clamp(2.6rem, 8vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0 auto;
+    max-width: 12ch;
+  }
+  .lede { max-width: 34rem; margin: 18px auto 0; font-size: 1.2rem; }
+  .cta {
+    display: inline-block;
+    margin: 26px 0 0;
+    background: var(--leaf);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 999px;
+    box-shadow: 0 4px 0 #2a6e3f;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #2a6e3f; }
+  .cta:active { transform: translateY(2px); box-shadow: 0 2px 0 #2a6e3f; }
+  .cta-note { display: block; font-size: 0.95rem; margin-top: 10px; opacity: .75; }
+
+  /* The ground line: a wavy edge of soil */
+  .ground { display: block; width: calc(100% + 40px); height: 70px; margin: 48px -20px -1px; }
+
+  /* ---------- Underground ---------- */
+  .underground { color: var(--clay); padding: 8px 20px 56px; position: relative; }
+  .underground h2 {
+    color: #fff; text-align: center; font-weight: 800;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.05; margin: 0 0 8px;
+  }
+  .underground .sub { text-align: center; margin: 0 auto 40px; max-width: 30rem; }
+
+  .roots { position: relative; max-width: 1040px; margin: 0 auto; }
+  .root-lines { position: absolute; inset: -40px 0 auto 0; width: 100%; height: 120px; pointer-events: none; }
+  .steps {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    counter-reset: step;
+  }
+  .steps li { position: relative; padding-top: 70px; text-align: center; }
+  .steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 52px; height: 52px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--soil-light); color: #fff; font-weight: 800; font-size: 1.5rem;
+    box-shadow: inset 0 -4px 0 rgba(0,0,0,.15);
+  }
+  .steps h3 { color: #fff; font-size: 1.45rem; font-weight: 700; margin: 0 0 4px; line-height: 1.15; }
+  .steps p { margin: 0 auto; max-width: 18rem; }
+
+  .promise {
+    max-width: 40rem; margin: 56px auto 0; text-align: center;
+    color: #fff; font-size: 1.3rem; font-weight: 500; line-height: 1.35;
+  }
+  .promise span { color: var(--sprout); font-weight: 700; }
+
+  footer {
+    max-width: 1040px; margin: 56px auto 0; padding-top: 20px;
+    border-top: 2px dashed rgba(233, 201, 168, .3);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- The one moment: the seedling pops up and the swap arrows draw in ---------- */
+  .m-plant { transform-box: fill-box; transform-origin: 50% 100%; animation: sprout 0.9s cubic-bezier(.2, 1.6, .4, 1) 0.2s both; }
+  .m-arrow { stroke-dasharray: 720; stroke-dashoffset: 720; animation: draw 1s ease-out forwards; }
+  .m-arrow.two { animation-delay: .35s; }
+  .m-head { opacity: 0; animation: appear .2s ease-out forwards; }
+  .m-head.one { animation-delay: .9s; }
+  .m-head.two { animation-delay: 1.25s; }
+  .m-blink { transform-box: fill-box; transform-origin: center; animation: blink 5s 2s infinite; }
+  @keyframes sprout { from { transform: scale(0.2, 0); } to { transform: scale(1, 1); } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes appear { to { opacity: 1; } }
+  @keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
+  @media (prefers-reduced-motion: reduce) {
+    .m-plant, .m-arrow, .m-head, .m-blink { animation: none; opacity: 1; stroke-dashoffset: 0; }
+    .cta { transition: none; }
+  }
+
+  @media (max-width: 760px) {
+    .steps { grid-template-columns: 1fr; gap: 36px; }
+    .root-lines { display: none; }
+    .soon { font-size: 0.85rem; padding: 3px 10px; }
+    .wordmark { font-size: 1.2rem; }
+    .mascot { margin-top: 16px; }
+    footer { flex-direction: column; text-align: center; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<header class="sky">
+  <div class="top">
+    <span class="wordmark">RootToGo</span>
+    <span class="soon">Coming soon to iPhone</span>
+  </div>
+
+  <!-- The RootToGo seedling, drawn from the app icon -->
+  <svg class="mascot" viewBox="180 190 664 630" role="img" aria-label="A smiling seedling with two swap arrows circling it">
+    <defs>
+      <marker id="head" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 Z" fill="#3a9656"/>
+      </marker>
+    </defs>
+    <path class="m-arrow one" d="M232 470 A 290 290 0 0 1 700 250" stroke="#3a9656" stroke-width="40" fill="none" stroke-linecap="round"/>
+    <path class="m-arrow two" d="M792 554 A 290 290 0 0 1 324 774" stroke="#3a9656" stroke-width="40" fill="none" stroke-linecap="round"/>
+    <!-- arrowheads appear once each arrow has drawn -->
+    <path class="m-head one" d="M232 470 A 290 290 0 0 1 700 250" stroke="none" fill="none" marker-end="url(#head)" stroke-width="40"/>
+    <path class="m-head two" d="M792 554 A 290 290 0 0 1 324 774" stroke="none" fill="none" marker-end="url(#head)" stroke-width="40"/>
+    <ellipse cx="512" cy="690" rx="200" ry="70" fill="#9b6a4a"/>
+    <ellipse cx="512" cy="672" rx="180" ry="46" fill="#b98460"/>
+    <g class="m-plant">
+      <path d="M512 670 C 508 610, 506 560, 512 500" stroke="#3a9656" stroke-width="30" fill="none" stroke-linecap="round"/>
+      <path d="M510 505 C 470 420, 370 400, 350 460 C 340 520, 420 560, 510 505 Z" fill="#5cc47a" stroke="#3a9656" stroke-width="15" stroke-linejoin="round"/>
+      <path d="M514 505 C 554 420, 654 400, 674 460 C 684 520, 604 560, 514 505 Z" fill="#74d68f" stroke="#3a9656" stroke-width="15" stroke-linejoin="round"/>
+      <g class="m-blink">
+        <ellipse cx="455" cy="470" rx="15" ry="20" fill="#2e2a3a"/>
+        <ellipse cx="569" cy="470" rx="15" ry="20" fill="#2e2a3a"/>
+      </g>
+      <circle cx="460" cy="463" r="5" fill="#fff"/><circle cx="574" cy="463" r="5" fill="#fff"/>
+      <path d="M492 500 Q512 520 532 500" stroke="#2e2a3a" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <ellipse cx="420" cy="500" rx="20" ry="12" fill="#ff8fa3" opacity=".8"/>
+      <ellipse cx="604" cy="500" rx="20" ry="12" fill="#ff8fa3" opacity=".8"/>
+    </g>
+  </svg>
+
+  <h1>Trade cuttings, not cash.</h1>
+  <p class="lede">RootToGo is a plant-swapping app for your neighborhood. Share your extra cuttings, pick up something new from a grower nearby, and watch each plant's family spread from home to home.</p>
+  <a class="cta" href="mailto:support@shimi.life?subject=RootToGo%20early%20access&body=Hi!%20I'd%20like%20to%20try%20RootToGo%20before%20it%20launches.%20My%20ZIP%20code%20is%3A%20">Get early access</a>
+  <span class="cta-note">Email us and we'll invite you to the iPhone beta.</span>
+
+  <svg class="ground" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 40 C 120 10, 240 10, 360 32 S 600 62, 720 36 S 960 6, 1080 30 S 1320 60, 1440 30 L1440 70 L0 70 Z" fill="#6f4a33"/>
+  </svg>
+</header>
+
+<main class="underground">
+  <h2>How it grows</h2>
+  <p class="sub">Every swap plants something new, down here where the roots spread.</p>
+
+  <div class="roots">
+    <!-- roots running from the surface down to each step -->
+    <svg class="root-lines" viewBox="0 0 1040 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M520 0 C 520 50, 173 30, 173 66" stroke="#9b6a4a" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M520 0 L 520 66" stroke="#9b6a4a" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M520 0 C 520 50, 867 30, 867 66" stroke="#9b6a4a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </svg>
+    <ol class="steps">
+      <li>
+        <h3>List what you've grown</h3>
+        <p>Too many pothos? Snap a photo, pick its stage, and put it up for swap, as a trade or a gift.</p>
+      </li>
+      <li>
+        <h3>Swap with someone nearby</h3>
+        <p>Browse plants by distance, never by address. Chat in the app and meet somewhere public.</p>
+      </li>
+      <li>
+        <h3>Watch it travel</h3>
+        <p>Every plant keeps its family tree, so you can see how far your cutting's grandchildren have gone.</p>
+      </li>
+    </ol>
+  </div>
+
+  <p class="promise">No money, ever. Give a plant away and earn <span>Seeds</span> to spend on your next one.</p>
+
+  <footer>
+    <span>RootToGo, made with love for plant people.</span>
+    <a href="mailto:support@shimi.life">support@shimi.life</a>
+  </footer>
+</main>
+
+</body>
+</html>
