@@ -132,6 +132,10 @@
     display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
     font-size: 0.95rem;
   }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .footer-links a { display: inline-flex; align-items: center; gap: 6px; }
+  .footer-links a:hover { color: #fff; }
+  .footer-links svg { width: 1.15em; height: 1.15em; flex: none; }
 
   /* ---------- The one moment: the seedling pops up and the swap arrows draw in ---------- */
   .m-plant { transform-box: fill-box; transform-origin: 50% 100%; animation: sprout 0.9s cubic-bezier(.2, 1.6, .4, 1) 0.2s both; }
@@ -157,6 +161,7 @@
     .wordmark { font-size: 1.2rem; }
     .mascot { margin-top: 16px; }
     footer { flex-direction: column; text-align: center; align-items: center; }
+    .footer-links { justify-content: center; }
   }
 </style>
 </head>
@@ -238,7 +243,13 @@
 
   <footer>
     <span>RootToGo, made with love for plant people.</span>
-    <a href="mailto:support@shimi.life">support@shimi.life</a>
+    <div class="footer-links">
+      <a href="https://www.youtube.com/@ShimisCorner" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 8.2 L16 12 L10 15.8 Z" fill="currentColor"/></svg>
+        Watch Shimi's Corner on YouTube
+      </a>
+      <a href="mailto:support@shimi.life">support@shimi.life</a>
+    </div>
   </footer>
 </main>
 
