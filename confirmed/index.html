@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>RootToGo Email Confirmed</title>
+<meta name="description" content="Your RootToGo email is confirmed.">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #dce3fe;
+    --sky-deep: #c3cffc;
+    --leaf: #3a9656;
+    --leaf-deep: #2c7843;
+    --ink: #2e2a3a;
+    --paper: #ffffff;
+    --muted: #5d586b;
+    --warn: #b4542c;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: "Baloo 2", ui-rounded, system-ui, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(180deg, #eef1ff 0%, var(--sky) 60%);
+    min-height: 100vh;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 20px 16px 40px;
+  }
+  .top { width: 100%; max-width: 520px; display: flex; align-items: center; gap: 10px; }
+  .top img { width: 40px; height: 40px; border-radius: 10px; }
+  .wordmark { font-weight: 800; font-size: 1.4rem; color: var(--leaf); text-decoration: none; }
+  main {
+    margin-top: 40px;
+    width: 100%; max-width: 520px;
+    background: var(--paper);
+    border-radius: 28px;
+    box-shadow: 0 4px 0 var(--sky-deep);
+    padding: 32px 24px 28px;
+    text-align: center;
+  }
+  .badge {
+    width: 84px; height: 84px; margin: 0 auto 12px;
+    border-radius: 50%; display: grid; place-items: center;
+    font-size: 2.6rem; background: #eef6f0;
+  }
+  .badge.warn { background: #fbeee6; }
+  h1 { font-size: clamp(1.8rem, 6vw, 2.3rem); line-height: 1.1; margin: 0 0 10px; font-weight: 800; }
+  p { margin: 0 0 12px; }
+  .muted { color: var(--muted); font-size: 1rem; }
+  .button {
+    display: inline-block; margin: 10px 0 14px;
+    background: var(--leaf); color: #fff; text-decoration: none;
+    font-weight: 700; font-size: 1.15rem;
+    padding: 12px 28px; border-radius: 999px;
+    box-shadow: 0 3px 0 var(--leaf-deep);
+  }
+  .button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--leaf-deep); }
+  a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  [hidden] { display: none !important; }
+  footer { margin-top: 28px; color: var(--muted); font-size: 1rem; }
+  footer a { color: var(--leaf); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <img src="/roottogo-icon.png" alt="">
+  <a class="wordmark" href="/">RootToGo</a>
+</div>
+
+<main>
+  <!-- Shown when the link worked (the usual case). -->
+  <section id="ok">
+    <div class="badge" aria-hidden="true">🌱</div>
+    <h1>Your email is confirmed</h1>
+    <p>Welcome to RootToGo! Go back to the app and sign in with your email and password.</p>
+    <div id="open-app" hidden>
+      <a class="button" id="open-link" href="com.shimicorner.roottogo://confirm">Open RootToGo</a>
+      <p class="muted">If the button doesn't open the app, just open RootToGo yourself and sign in.</p>
+    </div>
+    <p class="muted" id="other-device">Opened this on a computer? That's fine. Your account is ready on your iPhone.</p>
+  </section>
+
+  <!-- Shown when the link had expired or was already used. -->
+  <section id="bad" hidden>
+    <div class="badge warn" aria-hidden="true">⏳</div>
+    <h1>This link has expired</h1>
+    <p>Confirmation links work once and only for a short while, and asking for a new email cancels the older ones.</p>
+    <p>Open RootToGo, try signing in, and tap <strong>Resend email</strong>. Then use the newest email.</p>
+    <p class="muted">Already confirmed? Then just sign in.</p>
+  </section>
+</main>
+
+<footer>
+  Need help? <a href="mailto:support@shimi.life">support@shimi.life</a>
+</footer>
+
+<script>
+  // Supabase sends people here after checking the link, adding either sign-in
+  // details or an error to the address (after ? or #).
+  (function () {
+    var query = new URLSearchParams(location.search);
+    var hash = new URLSearchParams(location.hash.replace(/^#/, ""));
+    var failed = query.get("error") || hash.get("error") || query.get("error_code") || hash.get("error_code");
+
+    if (failed) {
+      document.getElementById("ok").hidden = true;
+      document.getElementById("bad").hidden = false;
+      return;
+    }
+
+    // On an iPhone or iPad, offer to open the app with the same details, so it
+    // can sign straight in. Never jump automatically: without the app
+    // installed, Safari would show an error.
+    var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+              (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    if (ios) {
+      document.getElementById("open-link").href =
+        "com.shimicorner.roottogo://confirm" + location.search + location.hash;
+      document.getElementById("open-app").hidden = false;
+      document.getElementById("other-device").hidden = true;
+    }
+  })();
+</script>
+
+</body>
+</html>
